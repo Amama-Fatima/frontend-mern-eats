@@ -5,6 +5,7 @@ import SearchBar, { SearchForm } from "@/components/SearchBar";
 import SearchResultCard from "@/components/SearchResultCard";
 import SearchResultInfo from "@/components/SearchResultInfo";
 import SortOptionDropdown from "@/components/SortOptionDropdown";
+import { Restaurant } from "@/types";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -96,7 +97,7 @@ export default function SearchPage() {
             onChange={(value) => setSortOption(value)}
           />
         </div>
-        {results.data.map((restaurant) => (
+        {results.data.map((restaurant: Restaurant) => (
           <SearchResultCard restaurant={restaurant} />
         ))}
         <PaginationSelector
