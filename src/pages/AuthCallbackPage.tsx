@@ -14,10 +14,13 @@ export default function AuthCallbackPage() {
       createUser({ auth0Id: user.sub, email: user.email });
       hasCreatedUser.current = true;
     }
+    console.log("visiting auth callback page");
+    console.log("user", user);
+
     navigate("/");
   }, [createUser, navigate, user]);
 
-  return <div>Loading...</div>;
+  return <>Loading...</>;
 }
 
 //understand the use of useRef in the code snippet
