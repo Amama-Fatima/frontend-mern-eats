@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const userData = await response.json();
         setUser(userData);
       } else {
+        console.log("No valid session found");
         setUser(null);
       }
     } catch (error) {
