@@ -37,8 +37,10 @@ export const useSearchRestaurants = (
       `${API_BASE_URL}/api/restaurant/search/${city}?${params.toString()}`
     );
     if (!response.ok) {
+      console.log("Error fetching data:", response.statusText);
       throw new Error("An error occurred while fetching the data");
     }
+    console.log("Response data:", await response.clone().json());
     return response.json();
   };
 
