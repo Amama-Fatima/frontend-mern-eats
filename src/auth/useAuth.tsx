@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 type User = {
   userId: string;
@@ -13,6 +14,7 @@ type AuthContextType = {
   setUser: (user: User | null) => void;
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
+  loginWithRedirect: (returnTo?: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,6 +25,7 @@ const API_BASE_URL =
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const checkAuth = async () => {
     try {
@@ -43,6 +46,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const loginWithRedirect = (returnTo?: string) => {
+    // Store the return path in sessionStorage
+    if (returnTo) {
+      sessionStorage.setItem("returnTo", returnTo);
+    }
+    navigate("/login");
   };
 
   const logout = async () => {
@@ -69,6 +80,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         isLoading,
         setUser,
         checkAuth,
+        loginWithRedirect,
         logout,
       }}
     >

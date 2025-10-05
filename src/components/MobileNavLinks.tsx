@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "@/auth/useAuth";
 
 export default function MobileNavLinks() {
-  const { logout } = useAuth0();
+  const { logout } = useAuth();
   return (
     <>
       <Link

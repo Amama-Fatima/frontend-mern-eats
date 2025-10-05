@@ -8,11 +8,12 @@ import {
 import { CircleUserRound, Menu } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
-import { useAuth0 } from "@auth0/auth0-react";
 import MobileNavLinks from "./MobileNavLinks";
+import { useAuth } from "@/auth/useAuth";
+import { Link } from "react-router-dom";
 
 export default function MobileNav() {
-  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user } = useAuth();
   return (
     <Sheet>
       <SheetTrigger>
@@ -34,12 +35,9 @@ export default function MobileNav() {
           {isAuthenticated ? (
             <MobileNavLinks />
           ) : (
-            <Button
-              className="flex-1 font-bold bg-orange-500"
-              onClick={async () => await loginWithRedirect()}
-            >
-              Log In
-            </Button>
+            <Link to="/login">
+              <Button className="flex-1 font-bold bg-orange-500">Log In</Button>
+            </Link>
           )}
         </SheetDescription>
       </SheetContent>

@@ -28,7 +28,15 @@ export default function LoginPage() {
       const userData = await login({ email, password });
       setUser(userData);
       await checkAuth(); // Refresh auth state
-      navigate("/");
+
+      // Check if there's a return path stored
+      const returnTo = sessionStorage.getItem("returnTo");
+      if (returnTo) {
+        sessionStorage.removeItem("returnTo"); // Clean up
+        navigate(returnTo);
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       // Error already handled by useLogin hook with toast
       console.error("Login error:", error);
