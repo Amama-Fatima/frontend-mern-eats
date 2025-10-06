@@ -8,6 +8,7 @@ import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 export default function AppRoutes() {
   return (
@@ -21,7 +22,22 @@ export default function AppRoutes() {
         }
       />
       {/* <Route path="/auth-callback" element={<AuthCallbackPage />} /> */}
-      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/login"
+        element={
+          <Layout showHero={false}>
+            <LoginPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <Layout showHero={false}>
+            <RegisterPage />
+          </Layout>
+        }
+      />
       <Route
         path="/search/:city"
         element={
